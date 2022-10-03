@@ -15,8 +15,9 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32522a51-2ed9-4a11-87a4-0041094ced4d" name="Changes" comment="Format">
+    <list default="true" id="32522a51-2ed9-4a11-87a4-0041094ced4d" name="Changes" comment="Added missing pos field and next method for tokenize">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tokenizer.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/tokenizer.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +101,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1664791907527</updated>
-      <workItem from="1664791909341" duration="9100000" />
+      <workItem from="1664791909341" duration="10825000" />
     </task>
     <task id="LOCAL-00001" summary="Setup">
       <created>1664792121039</created>
@@ -130,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664795154558</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added missing pos field and next method for tokenize">
+      <created>1664801134628</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1664801134628</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,18 +161,8 @@
     <MESSAGE value="Fixed some git issues, added some tokenizer stuff" />
     <MESSAGE value="Wrote some basic tests" />
     <MESSAGE value="Format" />
-    <option name="LAST_COMMIT_MESSAGE" value="Format" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/tokenizer.rs</url>
-          <line>73</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Added missing pos field and next method for tokenize" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added missing pos field and next method for tokenize" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

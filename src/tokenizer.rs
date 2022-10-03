@@ -79,6 +79,19 @@ impl Tokenize {
         s
     }
 }
+// Not super sure about this, it's inheritance through composition, good enough for now
+pub struct Tokenizer {
+    t : Tokenize,
+    token : TokenT,
+}
+
+impl Tokenizer {
+    pub fn next_token(&mut self) {
+        self.token = self.t.next()
+    }
+}
+
+/** TEST STUFF **/
 
 // Just straight up stole this from stackoverflow
 fn do_vectors_match<T: PartialEq>(a: &Vec<T>, b: &Vec<T>) -> bool {
@@ -86,7 +99,7 @@ fn do_vectors_match<T: PartialEq>(a: &Vec<T>, b: &Vec<T>) -> bool {
     matching == a.len() && matching == b.len()
 }
 
-pub fn test_some_things() {
+pub fn test_tokenize() {
     // Prep
     let mut t0_tokenize = Tokenize { s: String::from("1+1"), pos: 0 };
     let t0_vector = vec![TokenT::ONE, TokenT::PLUS, TokenT::ONE, TokenT::EOS];

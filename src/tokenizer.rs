@@ -127,6 +127,7 @@ pub fn test_tokenize() {
 
     // Test vector matching
     println!("\n**** Vector Matching Tests ****\n");
+    assert_eq!(&t0_vector, &t0_vector);
     println!("Matching t0 to t0. Expected: true, result: {}", do_vectors_match(&t0_vector, &t0_vector));
     println!("Matching t0 to t1. Expected: true, result: {}", do_vectors_match(&t0_vector, &t1_vector));
     println!("Matching t0 to t2. Expected: false, result: {}", do_vectors_match(&t0_vector, &t2_vector));

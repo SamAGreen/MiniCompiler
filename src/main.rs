@@ -1,6 +1,8 @@
 pub mod tokenizer;
+pub mod ast;
 
 fn main() {
     println!("Hello, world!");
-    tokenizer::test_tokenize();
+    ast::test_pretty()
+    //tokenizer::test_tokenize();
 }

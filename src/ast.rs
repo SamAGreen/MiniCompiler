@@ -4,13 +4,13 @@ enum ExpType {
     MULT
 }
 
-trait Exp {
+pub trait Exp {
     fn eval(&self) -> i32;
     fn pretty(&self) -> String;
     fn get_type(&self) -> ExpType;
 }
 
-struct IntExp {
+pub struct IntExp {
     val: i32
 }
 
@@ -28,7 +28,7 @@ impl Exp for IntExp {
     }
 }
 
-struct PlusExp<T:Exp,U:Exp> {
+pub struct PlusExp<T:Exp,U:Exp> {
     e1: T,
     e2: U
 }
@@ -47,7 +47,7 @@ impl<T:Exp, U:Exp> Exp for PlusExp<T,U> {
     }
 }
 
-struct MultExp<T:Exp,U:Exp> {
+pub struct MultExp<T:Exp,U:Exp> {
     e1: T,
     e2: U
 }

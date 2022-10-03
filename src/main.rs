@@ -1,5 +1,6 @@
 pub mod tokenizer;
 pub mod ast;
+mod parser;
 
 fn main() {
     println!("Hello, world!");

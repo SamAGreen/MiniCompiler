@@ -6,31 +6,30 @@ pub enum TokenT {
     OPEN,
     CLOSE,
     PLUS,
-    MULT
+    MULT,
 }
 
-pub fn show_tok(t : &TokenT) -> &'static str {
+pub fn show_tok(t: &TokenT) -> &'static str {
     return match t {
-        TokenT::ZERO=> "ZERO",
-        TokenT::ONE=> "ONE",
-        TokenT::TWO=> "TWO",
-        TokenT::OPEN=> "OPEN",
-        TokenT::CLOSE=> "CLOSE",
-        TokenT::PLUS=> "PLUS",
-        TokenT::MULT=> "MULT"
-    }
+        TokenT::ZERO => "ZERO",
+        TokenT::ONE => "ONE",
+        TokenT::TWO => "TWO",
+        TokenT::OPEN => "OPEN",
+        TokenT::CLOSE => "CLOSE",
+        TokenT::PLUS => "PLUS",
+        TokenT::MULT => "MULT"
+    };
 }
 
 pub struct Tokenize {
-    s: String
+    s: String,
 }
 
 impl Tokenize {
-
     pub fn scan(&self) -> Vec<TokenT> {
         let mut v: Vec<TokenT> = vec![];
 
-        for c in self.s.chars(){
+        for c in self.s.chars() {
             match c {
                 '0' => v.push(TokenT::ZERO),
                 '1' => v.push(TokenT::ONE),
@@ -84,7 +83,7 @@ pub fn test_some_things() {
     let t4_tokenize = Tokenize { s: String::from("((1+2)*2)+1") };
     let t4_vector = vec![
         TokenT::OPEN, TokenT::OPEN, TokenT::ONE, TokenT::PLUS, TokenT::TWO, TokenT::CLOSE,
-        TokenT::MULT, TokenT::TWO, TokenT::CLOSE, TokenT::PLUS, TokenT::ONE
+        TokenT::MULT, TokenT::TWO, TokenT::CLOSE, TokenT::PLUS, TokenT::ONE,
     ];
     let t4_string = String::from("OPEN;OPEN;ONE;PLUS;TWO;CLOSE;MULT;TWO;CLOSE;PLUS;ONE;");
 
@@ -108,17 +107,11 @@ pub fn test_some_things() {
     println!("Matching t0 scan with t2_vector. Expected: false, result: {}", do_vectors_match(&(t0_tokenize.scan()), &t2_vector));
 
     println!("\nShow:");
-    println!("Matching t0 show with string.     Expected: true: result: {}",t0_tokenize.show().eq(&t0_string));
-    println!("Matching t0 show with t1_string.  Expected: true: result: {}",t0_tokenize.show().eq(&t1_string));
-    println!("Matching t1 show with string.     Expected: true: result: {}",t1_tokenize.show().eq(&t1_string));
-    println!("Matching t2 show with string.     Expected: true: result: {}",t2_tokenize.show().eq(&t2_string));
-    println!("Matching t3 show with string.     Expected: true: result: {}",t3_tokenize.show().eq(&t3_string));
-    println!("Matching t4 show with string.     Expected: true: result: {}",t4_tokenize.show().eq(&t4_string));
-    println!("Matching t0 show with t2_string.  Expected: false: result: {}",t0_tokenize.show().eq(&t2_string));
-
-
-
-
-
-
+    println!("Matching t0 show with string.     Expected: true: result: {}", t0_tokenize.show().eq(&t0_string));
+    println!("Matching t0 show with t1_string.  Expected: true: result: {}", t0_tokenize.show().eq(&t1_string));
+    println!("Matching t1 show with string.     Expected: true: result: {}", t1_tokenize.show().eq(&t1_string));
+    println!("Matching t2 show with string.     Expected: true: result: {}", t2_tokenize.show().eq(&t2_string));
+    println!("Matching t3 show with string.     Expected: true: result: {}", t3_tokenize.show().eq(&t3_string));
+    println!("Matching t4 show with string.     Expected: true: result: {}", t4_tokenize.show().eq(&t4_string));
+    println!("Matching t0 show with t2_string.  Expected: false: result: {}", t0_tokenize.show().eq(&t2_string));
 }

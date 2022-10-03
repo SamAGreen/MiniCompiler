@@ -5,7 +5,7 @@
 // F => N | (E)
 
 use crate::tokenizer::{Tokenizer,TokenT};
-use crate::ast::{Exp,IntExp,PlusExpExp,MultExp};
+use crate::ast::{Exp,IntExp,PlusExp,MultExp};
 
 
 struct Parser {

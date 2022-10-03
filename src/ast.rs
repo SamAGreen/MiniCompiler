@@ -1,4 +1,4 @@
-enum ExpType {
+pub enum ExpType {
     INT,
     PLUS,
     MULT

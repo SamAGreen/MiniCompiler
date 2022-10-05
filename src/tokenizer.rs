@@ -10,22 +10,22 @@ pub enum TokenT {
     MULT,
 }
 
-pub fn show_tok(t: &TokenT) -> &'static str {
+pub fn show_tok(t: &TokenT) -> String {
     return match t {
-        TokenT::EOS => "EOS",
-        TokenT::ZERO => "ZERO",
-        TokenT::ONE => "ONE",
-        TokenT::TWO => "TWO",
-        TokenT::OPEN => "OPEN",
-        TokenT::CLOSE => "CLOSE",
-        TokenT::PLUS => "PLUS",
-        TokenT::MULT => "MULT"
+        TokenT::EOS => String::from("EOS"),
+        TokenT::ZERO => String::from("ZERO"),
+        TokenT::ONE => String::from("ONE"),
+        TokenT::TWO => String::from("TWO"),
+        TokenT::OPEN => String::from("OPEN"),
+        TokenT::CLOSE => String::from("CLOSE"),
+        TokenT::PLUS => String::from("PLUS"),
+        TokenT::MULT => String::from("MULT")
     };
 }
 
-struct Tokenize {
-    s: String,
-    pos: usize,
+pub struct  Tokenize {
+    pub s: String,
+    pub pos: usize,
 }
 
 impl Tokenize {
@@ -52,7 +52,7 @@ impl Tokenize {
         }
     }
 
-    pub fn scan(&mut self) -> Vec<TokenT> {
+    fn scan(&mut self) -> Vec<TokenT> {
         let mut v: Vec<TokenT> = vec![];
         let mut t: TokenT;
 
@@ -68,12 +68,12 @@ impl Tokenize {
         v
     }
 
-    pub fn show(&mut self) -> String {
+    fn show(&mut self) -> String {
         let mut s: String = String::from("");
 
         let test = self.scan();
         for v in test.iter() {
-            s.push_str(show_tok(v));
+            s.push_str(&*show_tok(v));
             s.push(';');
         }
         s
@@ -81,8 +81,8 @@ impl Tokenize {
 }
 // Not super sure about this, it's inheritance through composition, good enough for now
 pub struct Tokenizer {
-    t : Tokenize,
-    pub     token : TokenT,
+    pub t : Tokenize,
+    pub token : TokenT,
 }
 
 impl Tokenizer {
@@ -183,5 +183,25 @@ mod tests {
         let mut tokenize = Tokenize { s: String::from("1 + 1"), pos: 0 };
         let string = String::from("ONE;MULT;ONE;EOS;");
         assert_ne!(tokenize.show(),string)
+    }
+
+    #[test]
+    fn test_tokenizer_show() {
+        let mut tokenizer = Tokenizer{ t: Tokenize { s: String::from("1 + 1"), pos: 0 }, token: TokenT::EOS };
+        let string = String::from("ONE;PLUS;ONE;EOS;");
+        assert_eq!(tokenizer.t.show(),string);
+    }
+
+    #[test]
+    fn test_tokenizer_scan() {
+        let mut tokenizer = Tokenizer{ t: Tokenize { s: String::from("1 + 1"), pos: 0 }, token: TokenT::EOS };
+        let vector = vec![TokenT::ONE, TokenT::PLUS, TokenT::ONE, TokenT::EOS];
+        assert_eq!(tokenizer.t.scan(), vector);
+    }
+
+    #[test]
+    fn test_tokenizer_next() {
+        let mut tokenizer = Tokenizer{ t: Tokenize { s: String::from("1 + 1"), pos: 0 }, token: TokenT::EOS };
+
     }
 }

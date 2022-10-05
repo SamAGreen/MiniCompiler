@@ -6,10 +6,8 @@
 
 use crate::tokenizer::{Tokenizer,TokenT};
 use crate::ast::{Exp,IntExp,PlusExp,MultExp};
-use crate::ast::ExpType::{MULT, PLUS};
 
-
-struct Parser {
+pub struct Parser {
     t: Tokenizer
 }
 
@@ -63,6 +61,58 @@ impl Parser {
     }
 
     fn parse_f(&mut self) -> Option<Box<dyn Exp>> {
-        todo!()
+        return match self.t.token {
+            TokenT::ZERO => {
+                self.t.next_token();
+                Some(Box::new(IntExp {val: 0}))
+            },
+            TokenT::ONE => {
+                self.t.next_token();
+                Some(Box::new(IntExp {val: 1}))
+            },
+            TokenT::TWO => {
+                self.t.next_token();
+                Some(Box::new(IntExp {val: 2}))
+            },
+            TokenT::OPEN => {
+                self.t.next_token();
+                let e = self.parse_e();
+
+                if e.is_none() {
+                    return e;
+                }
+
+                if self.t.token != TokenT::CLOSE {
+                    return None;
+                }
+
+                self.t.next_token();
+                e
+            },
+            _ => None
+
+        }
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::tokenizer::Tokenize;
+    use super::*;
+
+    fn display(e : Option<Box<dyn Exp>>) {
+        match e {
+            Some(exp) => println!("{}\n", exp.pretty()),
+            None => println!("nothing\n")
+        }
+    }
+
+    #[test]
+    fn test() {
+        let mut p = Parser { t: (Tokenizer { t: (Tokenize { s: "(1 + 2) * 0".to_string(), pos: 0 }), token: TokenT::EOS }) };
+        p.t.next_token();
+        display(p.parse());
+        assert_eq!(1,1)
+    }
+
 }

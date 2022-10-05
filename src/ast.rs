@@ -66,7 +66,7 @@ impl Exp for MultExp {
                 s+= &*self.e1.pretty();
                 s.push(')')
             },
-            _ => s+= &*self.e2.pretty()
+            _ => s+= &*self.e1.pretty()
         };
         s.push('*');
         match self.e2.get_type() {

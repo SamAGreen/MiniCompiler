@@ -18,9 +18,10 @@ impl Parser {
 
     fn parse_e(&mut self) -> Option<Box<dyn Exp>> {
         let t = self.parse_t();
-        return match t {
-            Some(left) => self.parse_e2(left),
-            None =>  t
+        if let Some(left) = t {
+            self.parse_e2(left)
+        } else {
+            t
         }
     }
 
@@ -29,9 +30,10 @@ impl Parser {
             self.t.next_token();
 
             let t = self.parse_t();
-            return match t {
-                Some(right) => self.parse_e2(Box::new(PlusExp {e1:left, e2: right})),
-                None => t
+            return if let Some(right) = t {
+                self.parse_e2(Box::new(PlusExp {e1:left, e2: right}))
+            } else {
+                t
             }
         }
 
@@ -40,10 +42,10 @@ impl Parser {
 
     fn parse_t(&mut self) -> Option<Box<dyn Exp>> {
         let f = self.parse_f();
-
-        return match f {
-            Some(exp) => self.parse_t2(exp),
-            None => f
+        return if let Some(exp) = f {
+            self.parse_t2(exp)
+        } else {
+            f
         }
     }
 
@@ -52,9 +54,10 @@ impl Parser {
             self.t.next_token();
 
             let t = self.parse_f();
-            return match t {
-                Some(right) => self.parse_t2(Box::new(MultExp {e1: left, e2: right})),
-                None => t
+            return if let Some(right) = t {
+                self.parse_t2(Box::new(MultExp { e1: left, e2: right }))
+            } else {
+                t
             }
         }
         Some(left)
@@ -100,18 +103,52 @@ mod tests {
     use crate::tokenizer::{tokenizer};
     use super::*;
 
-    fn display(e : Option<Box<dyn Exp>>) {
-        match e {
-            Some(exp) => println!("{}\n", exp.pretty()),
-            None => println!("nothing\n")
-        }
+    #[test]
+    fn test_1() {
+        let mut p = Parser { t: tokenizer("(1)*0".to_string()) };
+        let ret = p.parse();
+        assert!(ret.unwrap().pretty().eq("1*0"));
     }
 
     #[test]
-    fn test() {
-        let mut p = Parser { t: tokenizer("(1 + 2) * 0".to_string()) };
+    fn test_2() {
+        let mut p = Parser { t: tokenizer("1 + 0 ".to_string()) };
         let ret = p.parse();
+        assert!(ret.unwrap().pretty().eq("1+0"));
+    }
 
-        assert!(ret.unwrap().pretty().eq("(1+2)*0"));
+    #[test]
+    fn test_3() {
+        let mut p = Parser { t: tokenizer("1 + (0) ".to_string()) };
+        let ret = p.parse();
+        assert!(ret.unwrap().pretty().eq("1+0"));
+    }
+
+    #[test]
+    fn test_4() {
+        let mut p = Parser { t: tokenizer("1 + 2 * 0 ".to_string()) };
+        let ret = p.parse();
+        assert!(ret.unwrap().pretty().eq("1+2*0"));
+    }
+
+    #[test]
+    fn test_5() {
+        let mut p = Parser { t: tokenizer("1 * 2 + 0 ".to_string()) };
+        let ret = p.parse();
+        assert!(ret.unwrap().pretty().eq("1*2+0"));
+    }
+
+    #[test]
+    fn test_6() {
+        let mut p = Parser { t: tokenizer("(1* ( 1 + 2) * 0 )".to_string()) };
+        let ret = p.parse();
+        assert!(ret.unwrap().pretty().eq("1*(1+2)*0"));
+    }
+
+    #[test]
+    fn test_7() {
+        let mut p = Parser { t: tokenizer("(1 + 2) * 0 + 2".to_string()) };
+        let ret = p.parse();
+        assert!(ret.unwrap().pretty().eq("(1+2)*0+2"));
     }
 }

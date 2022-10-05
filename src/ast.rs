@@ -11,7 +11,7 @@ pub trait Exp {
 }
 
 pub struct IntExp {
-    val: i32
+    pub val: i32
 }
 
 impl Exp for IntExp {
@@ -28,12 +28,12 @@ impl Exp for IntExp {
     }
 }
 
-pub struct PlusExp<T:Exp,U:Exp> {
-    e1: T,
-    e2: U
+pub struct PlusExp {
+    pub e1: Box<dyn Exp>,
+    pub e2: Box<dyn Exp>
 }
 
-impl<T:Exp, U:Exp> Exp for PlusExp<T,U> {
+impl Exp for PlusExp {
     fn eval(&self) -> i32 {
         self.e1.eval() + self.e2.eval()
     }
@@ -47,12 +47,12 @@ impl<T:Exp, U:Exp> Exp for PlusExp<T,U> {
     }
 }
 
-pub struct MultExp<T:Exp,U:Exp> {
-    e1: T,
-    e2: U
+pub struct MultExp {
+    pub e1: Box<dyn Exp>,
+    pub e2: Box<dyn Exp>
 }
 
-impl<T:Exp, U:Exp> Exp for MultExp<T,U> {
+impl Exp for MultExp {
     fn eval(&self) -> i32 {
         self.e1.eval() * self.e2.eval()
     }
@@ -87,10 +87,10 @@ impl<T:Exp, U:Exp> Exp for MultExp<T,U> {
 }
 
 pub fn test_pretty() {
-    let zero = IntExp { val: 0 };
-    let one = IntExp { val: 1};
-    let two = IntExp { val: 2 };
-    let t0 = PlusExp {e1: one, e2: two};
+    let zero = Box::new( IntExp { val: 0 });
+    let one = Box::new(IntExp { val: 1});
+    let two = Box::new( IntExp { val: 2 });
+    let t0 = Box::new(PlusExp {e1: one, e2: two});
     let t1 = MultExp { e1: t0, e2: zero };
     println!("{}", t1.pretty())
 }

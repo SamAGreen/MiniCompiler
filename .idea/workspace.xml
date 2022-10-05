@@ -15,7 +15,7 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32522a51-2ed9-4a11-87a4-0041094ced4d" name="Changes" comment="wrote everything but parse_f, haven't tested anything yet">
+    <list default="true" id="32522a51-2ed9-4a11-87a4-0041094ced4d" name="Changes" comment="need to write pseudo constructor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tokenizer.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/tokenizer.rs" afterDir="false" />
@@ -107,7 +107,7 @@
       <workItem from="1664867865264" duration="642000" />
       <workItem from="1664871192075" duration="615000" />
       <workItem from="1664949107637" duration="3619000" />
-      <workItem from="1664952773878" duration="5731000" />
+      <workItem from="1664952773878" duration="7877000" />
     </task>
     <task id="LOCAL-00001" summary="Setup">
       <created>1664792121039</created>
@@ -172,7 +172,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664954718176</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="need to write pseudo constructor">
+      <created>1664960956433</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1664960956433</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,7 +206,8 @@
     <MESSAGE value="Added tokenizer" />
     <MESSAGE value="Added ast" />
     <MESSAGE value="wrote everything but parse_f, haven't tested anything yet" />
-    <option name="LAST_COMMIT_MESSAGE" value="wrote everything but parse_f, haven't tested anything yet" />
+    <MESSAGE value="need to write pseudo constructor" />
+    <option name="LAST_COMMIT_MESSAGE" value="need to write pseudo constructor" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

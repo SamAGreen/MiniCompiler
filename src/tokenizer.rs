@@ -24,8 +24,8 @@ pub fn show_tok(t: &TokenT) -> String {
 }
 
 pub struct  Tokenize {
-    pub s: String,
-    pub pos: usize,
+    s: String,
+    pos: usize,
 }
 
 impl Tokenize {
@@ -89,6 +89,12 @@ impl Tokenizer {
     pub fn next_token(&mut self) {
         self.token = self.t.next()
     }
+}
+
+pub fn tokenizer(s: String) -> Tokenizer {
+    let mut t = Tokenizer { t: (Tokenize { s, pos: 0 }), token: TokenT::EOS };
+    t.next_token();
+    t
 }
 
 /** TEST STUFF **/

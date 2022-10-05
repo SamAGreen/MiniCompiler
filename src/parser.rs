@@ -97,7 +97,7 @@ impl Parser {
 
 #[cfg(test)]
 mod tests {
-    use crate::tokenizer::Tokenize;
+    use crate::tokenizer::{tokenizer};
     use super::*;
 
     fn display(e : Option<Box<dyn Exp>>) {
@@ -109,10 +109,9 @@ mod tests {
 
     #[test]
     fn test() {
-        let mut p = Parser { t: (Tokenizer { t: (Tokenize { s: "(1 + 2) * 0".to_string(), pos: 0 }), token: TokenT::EOS }) };
-        p.t.next_token();
-        display(p.parse());
-        assert_eq!(1,1)
-    }
+        let mut p = Parser { t: tokenizer("(1 + 2) * 0".to_string()) };
+        let ret = p.parse();
 
+        assert!(ret.unwrap().pretty().eq("(1+2)*0"));
+    }
 }

@@ -82,7 +82,7 @@ impl Tokenize {
 // Not super sure about this, it's inheritance through composition, good enough for now
 pub struct Tokenizer {
     t : Tokenize,
-    token : TokenT,
+    pub     token : TokenT,
 }
 
 impl Tokenizer {

@@ -12,44 +12,24 @@ pub enum Exp {
     },
 }
 
-/*pub trait Exp {
-    fn eval(&self) -> i32;
-    fn pretty(&self) -> String;
-    fn get_type(&self) -> ExpType;
-}*/
-
 impl Exp {
     pub fn eval(&self) -> i32 {
         return match self {
             Exp::Int { val } => { *val }
-            Exp::Plus { e1, e2 } => { eval_plus(e1, e2) }
-            Exp::Mult { e1, e2 } => { eval_mult(e1, e2) }
+            Exp::Plus { e1, e2 } => { e1.eval() + e2.eval() }
+            Exp::Mult { e1, e2 } => { e1.eval() * e2.eval() }
         };
     }
 
     pub fn pretty(&self) -> String {
         return match self {
             Exp::Int { val } => { val.to_string() }
-            Exp::Plus { e1, e2 } => { pretty_plus(e1, e2) }
+            Exp::Plus { e1, e2 } => { e1.pretty() + "+" + &*e2.pretty() }
             Exp::Mult { e1, e2 } => { pretty_mult(e1) + "*" + &*pretty_mult(e2) }
         };
     }
 }
 
-fn eval_plus(e1: &Box<Exp>, e2: &Box<Exp>) -> i32 {
-    e1.eval() + e2.eval()
-}
-
-fn pretty_plus(e1: &Box<Exp>, e2: &Box<Exp>) -> String {
-    e1.pretty() + "+" + &*e2.pretty()
-}
-
-
-fn eval_mult(e1: &Box<Exp>, e2: &Box<Exp>) -> i32 {
-    e1.eval() * e2.eval()
-}
-
-// Just want to see if this works
 fn pretty_mult(e: &Box<Exp>) -> String {
     return match **e {
         Exp::Plus { .. } => {

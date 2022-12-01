@@ -1,4 +1,6 @@
-#[derive(Debug, PartialEq, Eq)]
+use std::fmt::Formatter;
+
+#[derive(Debug, PartialEq)]
 pub enum TokenT {
     EOS,
     ZERO,
@@ -10,17 +12,21 @@ pub enum TokenT {
     MULT,
 }
 
-pub fn show_tok(t: &TokenT) -> String {
-    return match t {
-        TokenT::EOS => String::from("EOS"),
-        TokenT::ZERO => String::from("ZERO"),
-        TokenT::ONE => String::from("ONE"),
-        TokenT::TWO => String::from("TWO"),
-        TokenT::OPEN => String::from("OPEN"),
-        TokenT::CLOSE => String::from("CLOSE"),
-        TokenT::PLUS => String::from("PLUS"),
-        TokenT::MULT => String::from("MULT")
-    };
+// Makes it possible to TokenT.to_string()
+impl std::fmt::Display for TokenT {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        let t = match self {
+            TokenT::EOS => String::from("EOS"),
+            TokenT::ZERO => String::from("ZERO"),
+            TokenT::ONE => String::from("ONE"),
+            TokenT::TWO => String::from("TWO"),
+            TokenT::OPEN => String::from("OPEN"),
+            TokenT::CLOSE => String::from("CLOSE"),
+            TokenT::PLUS => String::from("PLUS"),
+            TokenT::MULT => String::from("MULT")
+        };
+        write!(f, "{}", t)
+    }
 }
 
 pub struct  Tokenize {
@@ -73,13 +79,13 @@ impl Tokenize {
 
         let test = self.scan();
         for v in test.iter() {
-            s.push_str(&*show_tok(v));
+            s.push_str(&v.to_string());
             s.push(';');
         }
         s
     }
 }
-// Not super sure about this, it's inheritance through composition, good enough for now
+
 pub struct Tokenizer {
     pub t : Tokenize,
     pub token : TokenT,
@@ -208,6 +214,9 @@ mod tests {
     #[test]
     fn test_tokenizer_next() {
         let mut tokenizer = Tokenizer{ t: Tokenize { s: String::from("1 + 1"), pos: 0 }, token: TokenT::EOS };
-
+        tokenizer.next_token();
+        assert_eq!(tokenizer.token,TokenT::ONE);
+        tokenizer.next_token();
+        assert_eq!(tokenizer.token,TokenT::PLUS);
     }
 }

@@ -15,9 +15,10 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32522a51-2ed9-4a11-87a4-0041094ced4d" name="Changes" comment="what is this">
+    <list default="true" id="32522a51-2ed9-4a11-87a4-0041094ced4d" name="Changes" comment="Cleaning Up and writing Readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ast.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tokenizer.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/tokenizer.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +188,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665415141859</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Cleaning Up and writing Readme">
+      <created>1669889880959</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1669889880959</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,7 +225,8 @@
     <MESSAGE value="need to write pseudo constructor" />
     <MESSAGE value="changed traits and multiple structs to one enum of structs" />
     <MESSAGE value="what is this" />
-    <option name="LAST_COMMIT_MESSAGE" value="what is this" />
+    <MESSAGE value="Cleaning Up and writing Readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaning Up and writing Readme" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

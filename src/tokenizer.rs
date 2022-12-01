@@ -77,8 +77,8 @@ impl Tokenize {
     fn show(&mut self) -> String {
         let mut s: String = String::from("");
 
-        let test = self.scan();
-        for v in test.iter() {
+        let tokens = self.scan();
+        for v in tokens.iter() {
             s.push_str(&v.to_string());
             s.push(';');
         }

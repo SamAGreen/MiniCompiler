@@ -15,9 +15,11 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32522a51-2ed9-4a11-87a4-0041094ced4d" name="Changes" comment="Finished tokenizer part of readme">
+    <list default="true" id="32522a51-2ed9-4a11-87a4-0041094ced4d" name="Changes" comment="AST for Readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ast.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/ast.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +111,7 @@
       <workItem from="1664952773878" duration="7877000" />
       <workItem from="1664990215503" duration="2252000" />
       <workItem from="1665481472943" duration="79000" />
-      <workItem from="1670078625183" duration="7497000" />
+      <workItem from="1670078625183" duration="16133000" />
     </task>
     <task id="LOCAL-00001" summary="Setup">
       <created>1664792121039</created>
@@ -209,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670082523437</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="AST for Readme">
+      <created>1670086905459</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1670086905459</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,7 +250,8 @@
     <MESSAGE value="what is this" />
     <MESSAGE value="Cleaning Up and writing Readme" />
     <MESSAGE value="Finished tokenizer part of readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished tokenizer part of readme" />
+    <MESSAGE value="AST for Readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="AST for Readme" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

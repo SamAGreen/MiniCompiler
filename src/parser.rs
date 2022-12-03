@@ -1,9 +1,3 @@
-// E => T E'
-// E' => + T E'
-// T => F T'
-// T' => * F T'
-// F => N | (E)
-
 use crate::tokenizer::{Tokenizer,TokenT};
 use crate::ast::{Exp};
 
@@ -13,7 +7,16 @@ pub struct Parser {
 
 impl Parser {
     pub fn parse(&mut self) -> Option<Box<Exp>> {
-        self.parse_e()
+        return match self.parse_e() {
+            Some(p) => {
+                println!("Parsing was successful!");
+                Some(p)
+            },
+            None => {
+                println!("Parsing was unsuccessful!");
+                None
+            }
+        }
     }
 
     fn parse_e(&mut self) -> Option<Box<Exp>> {
@@ -104,51 +107,100 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_1() {
+    fn test_parse_success_1() {
         let mut p = Parser { t: tokenizer("(1)*0") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1*0"));
     }
 
     #[test]
-    fn test_2() {
+    fn test_parse_success_2() {
         let mut p = Parser { t: tokenizer("1 + 0 ") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1+0"));
     }
 
     #[test]
-    fn test_3() {
+    fn test_parse_success_3() {
         let mut p = Parser { t: tokenizer("1 + (0) ") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1+0"));
     }
 
     #[test]
-    fn test_4() {
+    fn test_parse_success_4() {
         let mut p = Parser { t: tokenizer("1 + 2 * 0 ") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1+2*0"));
     }
 
     #[test]
-    fn test_5() {
+    fn test_parse_success_5() {
         let mut p = Parser { t: tokenizer("1 * 2 + 0 ") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1*2+0"));
     }
 
     #[test]
-    fn test_6() {
+    fn test_parse_success_6() {
         let mut p = Parser { t: tokenizer("(1* ( 1 + 2) * 0 )") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1*(1+2)*0"));
     }
 
     #[test]
-    fn test_7() {
+    fn test_parse_success_7() {
         let mut p = Parser { t: tokenizer("(1 + 2) * 0 + 2") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("(1+2)*0+2"));
+    }
+
+    #[test]
+    fn test_parse_failure_1() {
+        let mut p = Parser { t: tokenizer("(1*0") };
+        let ret = p.parse();
+        assert!(ret.is_none());
+    }
+
+    #[test]
+    fn test_parse_failure_2() {
+        let mut p = Parser { t: tokenizer("1+ + 10 ") };
+        let ret = p.parse();
+        assert!(ret.is_none());
+    }
+
+    #[test]
+    fn test_parse_failure_3() {
+        let mut p = Parser { t: tokenizer("1 + (0 ") };
+        let ret = p.parse();
+        assert!(ret.is_none());
+    }
+
+    #[test]
+    fn test_parse_failure_4() {
+        let mut p = Parser { t: tokenizer("(1 + 2 * 0 ") };
+        let ret = p.parse();
+        assert!(ret.is_none());
+    }
+
+    #[test]
+    fn test_parse_failure_5() {
+        let mut p = Parser { t: tokenizer("1 *) 2 + 0)") };
+        let ret = p.parse();
+        assert!(ret.is_none());
+    }
+
+    #[test]
+    fn test_parse_failure_6() {
+        let mut p = Parser { t: tokenizer("(11*2+ ( 1 + 2 * 0 )") };
+        let ret = p.parse();
+        assert!(ret.is_none());
+    }
+
+    #[test]
+    fn test_parse_failure_7() {
+        let mut p = Parser { t: tokenizer("((((1 + 2))) * 0 + 2") };
+        let ret = p.parse();
+        assert!(ret.is_none());
     }
 }

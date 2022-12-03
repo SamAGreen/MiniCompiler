@@ -42,7 +42,8 @@ Der AST ist ein Weg die arithmetischen Ausdrücke in einer Baumstruktur dazustel
 Anfangs habe ich versucht den AST mit einem Trait, separaten Structs und Generics zu implementieren. 
 Dies erwies sich aber problematisch wegen dynamischen Speicherbedarf und wurde zu komplex um eine sinnvolle Lösung zu sein.</br>
 Meine jetzige Lösung basiert auf dem Fakt, dass ``enums`` und Pattern-matching mit ``match`` in Rust relativ mächtig sind. 
-### Das Enum
+
+### Enum
 ```
 pub enum Exp {
     Int {
@@ -77,14 +78,14 @@ Da die Größe von diesem struct unbekannt und potenziell unendlich ist, sind di
 Daher wird das Keyword ``Box<T>`` benutzt, das ist ein Pointer auf den Heap und hat daher eine feste Datengröße. 
 Da das struct dann aber auf dem Heap gespeichert wird, kann die Größe dynamisch sein.
 
-### Die Methoden
-Ausdrücke sollen auch noch Funktionalität besitzen, die über Speicherung der Struktur hinaus geht:
+### Funktionalität
+Die Funktionalität der Ausdrücke soll über nur der Speicherung der Struktur hinaus gehen:
 * Sich selbst auswerten, dies wird mit ``eval`` getan
 * Sich in einem String ausgeben, dies wird mit ``pretty`` getan
 
 Diese müssen natürlich abhängig von der Art des Ausdrucks variieren.
 In einer Sprache mit Polymorphismus und Vererbung würden die verschiedenen Ausdrücke alle die gleiche Methode, mit verschiedener Funktionalität haben, das funktioniert in Rust nicht so. </br>
-Hier gibt es jeweils nur eine Methode für das enum ``Exp``, das abhängig von der Art des Ausdrucks was anderes macht. Das wird mit dem Keyword ``match`` erreicht. Hier in ``eval``:
+Hier gibt es jeweils nur eine Methode für das enum ``Exp``, das abhängig von der Art des Ausdrucks, der die Methode aufruft, was anderes macht. Das wird mit dem Keyword ``match`` erreicht. Hier in ``eval``:
 ```
 pub fn eval(&self) -> i32 {
         return match self {
@@ -94,3 +95,13 @@ pub fn eval(&self) -> i32 {
         };
     }
 ```
+## Parser
+Der Parser benutzt den ``Tokenizer`` und diese Grammatik:
+```
+// E => T E'
+// E' => + T E'
+// T => F T'
+// T' => * F T'
+// F => N | (E)
+```
+um aus einem syntaktisch korrekten String einen validen AST zu bauen.

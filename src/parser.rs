@@ -105,49 +105,49 @@ mod tests {
 
     #[test]
     fn test_1() {
-        let mut p = Parser { t: tokenizer("(1)*0".to_string()) };
+        let mut p = Parser { t: tokenizer("(1)*0") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1*0"));
     }
 
     #[test]
     fn test_2() {
-        let mut p = Parser { t: tokenizer("1 + 0 ".to_string()) };
+        let mut p = Parser { t: tokenizer("1 + 0 ") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1+0"));
     }
 
     #[test]
     fn test_3() {
-        let mut p = Parser { t: tokenizer("1 + (0) ".to_string()) };
+        let mut p = Parser { t: tokenizer("1 + (0) ") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1+0"));
     }
 
     #[test]
     fn test_4() {
-        let mut p = Parser { t: tokenizer("1 + 2 * 0 ".to_string()) };
+        let mut p = Parser { t: tokenizer("1 + 2 * 0 ") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1+2*0"));
     }
 
     #[test]
     fn test_5() {
-        let mut p = Parser { t: tokenizer("1 * 2 + 0 ".to_string()) };
+        let mut p = Parser { t: tokenizer("1 * 2 + 0 ") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1*2+0"));
     }
 
     #[test]
     fn test_6() {
-        let mut p = Parser { t: tokenizer("(1* ( 1 + 2) * 0 )".to_string()) };
+        let mut p = Parser { t: tokenizer("(1* ( 1 + 2) * 0 )") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("1*(1+2)*0"));
     }
 
     #[test]
     fn test_7() {
-        let mut p = Parser { t: tokenizer("(1 + 2) * 0 + 2".to_string()) };
+        let mut p = Parser { t: tokenizer("(1 + 2) * 0 + 2") };
         let ret = p.parse();
         assert!(ret.unwrap().pretty().eq("(1+2)*0+2"));
     }

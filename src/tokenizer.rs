@@ -59,6 +59,9 @@ impl Tokenize {
     }
 
     fn scan(&mut self) -> Vec<TokenT> {
+        let curr_pos = self.pos;
+        self.pos = 0;
+
         let mut v: Vec<TokenT> = vec![];
         let mut t: TokenT;
 
@@ -70,7 +73,7 @@ impl Tokenize {
                 break
             }
         }
-
+        self.pos = curr_pos;
         v
     }
 
@@ -97,8 +100,8 @@ impl Tokenizer {
     }
 }
 
-pub fn tokenizer(s: String) -> Tokenizer {
-    let mut t = Tokenizer { t: (Tokenize { s, pos: 0 }), token: TokenT::EOS };
+pub fn tokenizer(s: &str) -> Tokenizer {
+    let mut t = Tokenizer { t: (Tokenize { s: s.to_string(), pos: 0 }), token: TokenT::EOS };
     t.next_token();
     t
 }
@@ -206,17 +209,37 @@ mod tests {
 
     #[test]
     fn test_tokenizer_scan() {
-        let mut tokenizer = Tokenizer{ t: Tokenize { s: String::from("1 + 1"), pos: 0 }, token: TokenT::EOS };
+        let mut tokenizer = tokenizer("1 + 1");
+        tokenizer.next_token();
+        assert_eq!(tokenizer.token,TokenT::PLUS);
+
         let vector = vec![TokenT::ONE, TokenT::PLUS, TokenT::ONE, TokenT::EOS];
         assert_eq!(tokenizer.t.scan(), vector);
+
+        assert_eq!(tokenizer.token,TokenT::PLUS);
     }
 
     #[test]
-    fn test_tokenizer_next() {
-        let mut tokenizer = Tokenizer{ t: Tokenize { s: String::from("1 + 1"), pos: 0 }, token: TokenT::EOS };
-        tokenizer.next_token();
+    fn test_tokenizer_next_1() {
+        let mut tokenizer = tokenizer("1 + 1");
         assert_eq!(tokenizer.token,TokenT::ONE);
         tokenizer.next_token();
         assert_eq!(tokenizer.token,TokenT::PLUS);
+        tokenizer.next_token();
+        assert_eq!(tokenizer.token,TokenT::ONE);
+        tokenizer.next_token();
+        assert_eq!(tokenizer.token,TokenT::EOS);
+    }
+
+    #[test]
+    fn test_tokenizer_next_2() {
+        let mut tokenizer = tokenizer("%&A1 * 2");
+        assert_eq!(tokenizer.token,TokenT::ONE);
+        tokenizer.next_token();
+        assert_eq!(tokenizer.token,TokenT::MULT);
+        tokenizer.next_token();
+        assert_eq!(tokenizer.token,TokenT::TWO);
+        tokenizer.next_token();
+        assert_eq!(tokenizer.token,TokenT::EOS);
     }
 }

@@ -15,11 +15,9 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32522a51-2ed9-4a11-87a4-0041094ced4d" name="Changes" comment="Cleaning Up and writing Readme">
+    <list default="true" id="32522a51-2ed9-4a11-87a4-0041094ced4d" name="Changes" comment="Finished tokenizer part of readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tokenizer.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/tokenizer.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +37,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="remove_tokenizer" />
+        <entry key="$PROJECT_DIR$" value="trying_traits_again" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -111,7 +109,7 @@
       <workItem from="1664952773878" duration="7877000" />
       <workItem from="1664990215503" duration="2252000" />
       <workItem from="1665481472943" duration="79000" />
-      <workItem from="1670078625183" duration="2951000" />
+      <workItem from="1670078625183" duration="7497000" />
     </task>
     <task id="LOCAL-00001" summary="Setup">
       <created>1664792121039</created>
@@ -204,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669902130709</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Finished tokenizer part of readme">
+      <created>1670082523437</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1670082523437</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,7 +240,8 @@
     <MESSAGE value="changed traits and multiple structs to one enum of structs" />
     <MESSAGE value="what is this" />
     <MESSAGE value="Cleaning Up and writing Readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaning Up and writing Readme" />
+    <MESSAGE value="Finished tokenizer part of readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished tokenizer part of readme" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -98,10 +98,15 @@ pub fn eval(&self) -> i32 {
 ## Parser
 Der Parser benutzt den ``Tokenizer`` und diese Grammatik:
 ```
-// E => T E'
-// E' => + T E'
-// T => F T'
-// T' => * F T'
-// F => N | (E)
+E => T E'
+E' => + T E'
+T => F T'
+T' => * F T'
+F => N | (E)
 ```
 um aus einem syntaktisch korrekten String einen validen AST zu bauen.
+Die grammatikalischen Regeln werden in den Methoden des Parsers abgebildet E => ``parse_e()``. 
+Rückgabe Werte werden hier immer mit ``Option<T>`` gewrapped, welches ein Weg ist potenziell undefinierte Werte zu repräsentieren. 
+Diese können entweder ``Some`` sein und einen Wert beinhalten, oder ``None`` sein und keinen Wert beinhalten.
+`Option<Box<T>>`` ist Rusts Pendant zu Nullpointer.  
+

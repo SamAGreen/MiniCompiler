@@ -7,7 +7,11 @@ pub struct Parser {
 
 impl Parser {
     pub fn parse(&mut self) -> Option<Box<Exp>> {
-        return match self.parse_e() {
+        let mut parsed = self.parse_e();
+        if self.t.token != TokenT::EOS {
+            parsed = None
+        }
+        match parsed{
             Some(p) => {
                 println!("Parsing was successful!");
                 Some(p)
@@ -185,7 +189,7 @@ mod tests {
 
     #[test]
     fn test_parse_failure_5() {
-        let mut p = Parser { t: tokenizer("1 *) 2 + 0)") };
+        let mut p = Parser { t: tokenizer("1 * 2 + 0)") };
         let ret = p.parse();
         assert!(ret.is_none());
     }
@@ -200,6 +204,13 @@ mod tests {
     #[test]
     fn test_parse_failure_7() {
         let mut p = Parser { t: tokenizer("((((1 + 2))) * 0 + 2") };
+        let ret = p.parse();
+        assert!(ret.is_none());
+    }
+
+    #[test]
+    fn test_parse_failure_8() {
+        let mut p = Parser { t: tokenizer("11") };
         let ret = p.parse();
         assert!(ret.is_none());
     }

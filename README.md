@@ -103,8 +103,27 @@ T => F T'
 T' => * F T'
 F => N | (E)
 ```
-um aus einem syntaktisch korrekten String einen validen AST zu bauen.
-Die grammatikalischen Regeln werden in den Methoden des Parsers abgebildet E => ``parse_e()``. 
-Rückgabe Werte werden hier immer mit ``Option<T>`` gewrapped, welches ein Weg ist potenziell undefinierte Werte zu repräsentieren. 
+um aus einem syntaktisch korrekten String einen validen AST zu bauen. </br>
+Die grammatikalischen Regeln werden in den Methoden des Parsers abgebildet, somit wird aus ``T' => * F T'`` 
+```
+fn parse_t2(&mut self, left: Box<Exp>) -> Option<Box<Exp>> {
+        if self.t.token == TokenT::MULT { 
+            self.t.next_token();            
+
+            let t = self.parse_f();
+            return if let Some(right) = t {
+                self.parse_t2(Box::new(Exp::Mult { e1: left, e2: right }))
+            } else {                        
+                t
+            }
+        }
+        Some(left)
+    }
+```
+Rückgabe Werte werden außerdem mit ``Option<T>`` gewrapped, welches ein Weg ist potenziell undefinierte Werte zu repräsentieren. 
 Diese können entweder ``Some`` sein und einen Wert beinhalten, oder ``None`` sein und keinen Wert beinhalten.
-`Option<Box<T>>`` ist Rusts Pendant zu Nullpointer.
+`Option<Box<T>>`` ist damit Rusts Pendant zu Nullpointern.
+
+## Quellen
+Um ein Gefühl für die Sprache zu kriegen habe ich mich anfangs durch die [Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/) Beispiele durchgeklickt. </br>
+Die [Dokumentation](https://doc.rust-lang.org/std/index.html) war sehr hilfreich. Aber am meisten hat mir der Rust Compiler selbst geholfen, dieser hat nämlich sehr gute Hinweise bei Fehlern, die meistens das Problem direkt lösten.

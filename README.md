@@ -36,6 +36,8 @@ Außerdem habe ich einen pseudo-Konstruktor ``tokenizer(s: &str) -> Tokenizer`` 
 Weil Rust standardmäßig die Möglichkeit bietet automatisierte Tests zu schreiben, habe ich ein paar parallel zur Implementierung geschrieben.
 Natürlich um sicherzustellen, dass mein Code auch funktioniert und weil ich es ausprobieren wollte.
 
+<div style="page-break-after: always;"></div>
+
 ## AST (Arithmetic Syntax Tree)
 Der AST ist ein Weg die arithmetischen Ausdrücke in einer Baumstruktur dazustellen.</br> 
 Anfangs habe ich versucht den AST mit einem Trait, separaten Structs und Generics zu implementieren. 
@@ -63,7 +65,7 @@ Jetzt hat man das enum ``Exp``, dass die structs:
 * ``Plus`` das zwei weitere Expressions beinhaltet, die miteinander addiert werden
 * ``Mult`` das zwei weitere Expressions beinhaltet, die miteinander multipliziert werden
 
-beinhaltet
+beinhaltet. 
 
 Dabei ist es noch wichtig zu bemerken, dass in Rust die Größe von Typen auf dem Stack zur Compilezeit klar sein muss.
 Das ist bei der Grundidee von rekursiven Datentypen, wie hier, nicht möglich:
@@ -94,6 +96,8 @@ pub fn eval(&self) -> i32 {
         };
     }
 ```
+<div style="page-break-after: always;"></div>
+
 ## Parser
 Der Parser benutzt den ``Tokenizer`` und diese Grammatik:
 ```
@@ -123,6 +127,8 @@ fn parse_t2(&mut self, left: Box<Exp>) -> Option<Box<Exp>> {
 Rückgabe Werte werden außerdem mit ``Option<T>`` gewrapped, welches ein Weg ist potenziell undefinierte Werte zu repräsentieren. 
 Diese können entweder ``Some`` sein und einen Wert beinhalten, oder ``None`` sein und keinen Wert beinhalten.
 `Option<Box<T>>`` ist damit Rusts Pendant zu Nullpointern.
+
+<div style="page-break-after: always;"></div>
 
 ## VM
 Die Implementierung einer sehr einfachen Stack-basierten virtuellen Maschine. <br>

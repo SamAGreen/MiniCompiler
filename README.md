@@ -124,6 +124,15 @@ Rückgabe Werte werden außerdem mit ``Option<T>`` gewrapped, welches ein Weg is
 Diese können entweder ``Some`` sein und einen Wert beinhalten, oder ``None`` sein und keinen Wert beinhalten.
 `Option<Box<T>>`` ist damit Rusts Pendant zu Nullpointern.
 
+## VM
+Die Implementierung einer sehr einfachen Stack-basierten virtuellen Maschine. <br>
+Die VM besitzt einen Vector ``code`` in dem alle Instruktionen gespeichert sind, diese werden iterativ auf den Stack ``stack`` gepusht/verarbeitet.
+Dafür gibt es drei Arten von Instruktionen: 
+* ``PUSH``, welches einen Integer Wert beinhaltet
+* ``PLUS``, welches zwei Operanden vom Stack holt, diese miteinander addiert und wieder auf den Stack legt
+* ``MULT``, analog zu ``PLUS`` nur mit einer Multiplikation
+
+Die ganze Verarbeitung passiert in der ``run`` Methode der ``VM``-Klasse. Das Ergebnis wird wie bei dem Parser in einer ``Option`` gewrappt, damit im Falle eines Scheiterns oder eines Fehlers ein ``None`` zurückgegeben werden kann.  
 ## Quellen
 Um ein Gefühl für die Sprache zu kriegen habe ich mich anfangs durch die [Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/) Beispiele durchgeklickt. </br>
 Die [Dokumentation](https://doc.rust-lang.org/std/index.html) war sehr hilfreich. Aber am meisten hat mir der Rust Compiler selbst geholfen, dieser hat nämlich sehr gute Hinweise bei Fehlern, die meistens das Problem direkt lösten.
